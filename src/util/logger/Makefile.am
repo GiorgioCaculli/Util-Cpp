@@ -1,12 +1,12 @@
 include $(top_srcdir)/common.mk
 
-AM_LDFLAGS = $(BOOST_LDFLAGS)
+lib_LTLIBRARIES = gzc/logger/libutil_logger.la
 
-noinst_LIBRARIES = libutil_logger.a
+gzc_logger_libutil_logger_la_SOURCES = Logger.cpp
 
-libutil_logger_a_SOURCES = Logger.cpp
+gzc_logger_libutil_logger_la_CPPFLAGS = $(BOOST_CPPFLAGS)
+gzc_logger_libutil_logger_la_CPPFLAGS += -DBOOST_ALL_NO_LIB
+gzc_logger_libutil_logger_la_CPPFLAGS += -DBOOST_ALL_DYN_LINK
+gzc_logger_libutil_logger_la_CPPFLAGS += -DBOOST_LOG_DYN_LINK
 
-libutil_logger_a_CPPFLAGS = $(BOOST_CPPFLAGS)
-libutil_logger_a_CPPFLAGS += -DBOOST_ALL_NO_LIB
-libutil_logger_a_CPPFLAGS += -DBOOST_ALL_DYN_LINK
-libutil_logger_a_CPPFLAGS += -DBOOST_LOG_DYN_LINK
+gzc_logger_libutil_logger_la_LDFLAGS = -version-info 1:1:0

@@ -1,5 +1,5 @@
 # Personal Utilities Libraries
-## User throughout various projects
+## Used throughout various (personal) projects
 
 ## Dependencies
 - [Boost](https://www.boost.org/)
@@ -16,8 +16,10 @@
 3. autoreconf -fiv ../
 4. ../configure
 5. make
+6. sudo (or doas) make install
 
 ### CMake
 1. mkdir build
 2. cmake ../
 3. make
+4. sudo (or doas) make install

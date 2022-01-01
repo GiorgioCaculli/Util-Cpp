@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "util/logger/Logger.hpp"
+#include <gzc/logger/Logger.hpp>
 
 #include <sstream>
 

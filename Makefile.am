@@ -2,16 +2,23 @@ include $(top_srcdir)/common.mk
 
 ACLOCAL_AMFLAGS = -I m4 --install
 
+EXTRA_DIST = $(top_srcdir)/include
+
 SUBDIRS = src
 
-bin_PROGRAMS = util
+noinst_PROGRAMS = util
 
 util_SOURCES = src/main.cpp
 
+loggerincludedir = $(includedir)/gzc/logger
+loggerinclude_HEADERS = include/gzc/logger/Logger.hpp
+serializeincludedir = $(includedir)/gzc/serialize
+serializeinclude_HEADERS = include/gzc/serialize/Serialize.hpp
+
 util_CPPFLAGS = $(BOOST_CPPFLAGS)
 
-util_LDADD = src/util/logger/libutil_logger.a
-util_LDADD += src/util/serialize/libutil_serialize.a
+util_LDADD = src/util/logger/gzc/logger/libutil_logger.la
+util_LDADD += src/util/serialize/gzc/serialize/libutil_serialize.la
 util_LDADD += $(BOOST_LDFLAGS)
 util_LDADD += $(BOOST_DATE_TIME_LIB)
 util_LDADD += $(BOOST_FILESYSTEM_LIB)

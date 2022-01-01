@@ -1,4 +1,4 @@
-#include "Logger.hpp"
+#include <gzc/logger/Logger.hpp>
 
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 
@@ -13,6 +13,7 @@
 #include <iostream>
 
 using namespace util;
+
 namespace logging = boost::log;
 namespace src = boost::log::sources;
 namespace expr = boost::log::expressions;

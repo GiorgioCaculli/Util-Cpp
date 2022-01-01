@@ -1,6 +1,6 @@
 AC_PREREQ([2.69])
 
-AC_INIT([util], [1.1], [gzc@caculli.it])
+AC_INIT([util], [1.1.0], [gzc@caculli.it], [gzc-util], [https://gitlab.com/GiorgioCaculli/Util-Cpp])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 
 AM_PROG_AR
@@ -9,12 +9,13 @@ LT_INIT([dlopen])
 
 AC_LANG([C++])
 
-AC_CONFIG_SRCDIR([src/main.cpp])
+AC_CONFIG_SRCDIR([src])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
 # Check for Programs
 AC_PROG_CXX
+AC_PROG_CXXCPP
 AC_PROG_INSTALL
 
 # Enforce C++11
@@ -33,9 +34,9 @@ AX_BOOST_THREAD
 
 # Check for header files
 AC_CHECK_HEADERS([
-    math.h
-    stdlib.h
-    pthread.h
+    iostream
+    string
+    sstream
 ])
 
 # Check for typedefs, structures and compiler characteristics
