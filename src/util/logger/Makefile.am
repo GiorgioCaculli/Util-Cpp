@@ -9,4 +9,4 @@ gzc_logger_libutil_logger_la_CPPFLAGS += -DBOOST_ALL_NO_LIB
 gzc_logger_libutil_logger_la_CPPFLAGS += -DBOOST_ALL_DYN_LINK
 gzc_logger_libutil_logger_la_CPPFLAGS += -DBOOST_LOG_DYN_LINK
 
-gzc_logger_libutil_logger_la_LDFLAGS = -version-info 1:1:0
+gzc_logger_libutil_logger_la_LDFLAGS = -version-info $(GZC_UTIL_LOGGER_VERSION)
