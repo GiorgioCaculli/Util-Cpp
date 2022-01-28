@@ -33,11 +33,7 @@ AX_BOOST_LOCALE
 AX_BOOST_THREAD
 
 # Check for header files
-AC_CHECK_HEADERS([
-    iostream
-    string
-    sstream
-])
+AC_CHECK_HEADERS([iostream string sstream])
 
 # Check for typedefs, structures and compiler characteristics
 
