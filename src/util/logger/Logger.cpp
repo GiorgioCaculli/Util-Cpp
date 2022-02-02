@@ -1,4 +1,4 @@
-#include <gzc/logger/Logger.hpp>
+#include <gzc/util/logger/Logger.hpp>
 
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 
@@ -12,7 +12,7 @@
 
 #include <iostream>
 
-using namespace util;
+using namespace gzc::util;
 
 namespace logging = boost::log;
 namespace src = boost::log::sources;
@@ -23,8 +23,8 @@ namespace keywords = boost::log::keywords;
 
 /**
  * Logger's constructor with a specific filename
- * @param id The logger's unique I
- * @param file_name The logger's custom filename
+ * \param id The logger's unique I
+ * \param file_name The logger's custom filename
  */
 Logger::Logger( std::string id, std::string file_name, bool debug )
         : _id( std::move( id ) )
@@ -44,70 +44,84 @@ Logger::~Logger()
 
 void Logger::init( const std::string &file_name )
 {
-    logging::add_file_log
-            (
-                    keywords::file_name = file_name,
-                    keywords::format =
-                            (
-                                    expr::stream
-                                            << expr::attr< unsigned int >( "LineID" )
-                                            << " ["<< expr::format_date_time< boost::posix_time::ptime >( "TimeStamp", "%Y-%m-%d %H:%M:%S" )
-                                            << "]: <" << logging::trivial::severity
-                                            << "> " << expr::smessage
-                            )
-            );
-    logging::add_common_attributes();
+    try
+    {
+        logging::add_file_log
+                (
+                        keywords::file_name = file_name,
+                        keywords::format =
+                                (
+                                        expr::stream
+                                                << expr::attr< unsigned int >( "LineID" )
+                                                << " ["<< expr::format_date_time< boost::posix_time::ptime >( "TimeStamp", "%Y-%m-%d %H:%M:%S" )
+                                                << "]: <" << logging::trivial::severity
+                                                << "> " << expr::smessage
+                                )
+                );
+        logging::add_common_attributes();
+    }
+    catch ( std::exception &e )
+    {
+        std::cerr << e.what() << std::endl;
+    }
 }
 
 /**
  * Function that will append the information requested throughout the execution of the program.
- * @param level The severity level
- * @param log_message The message to append
+ * \param level The severity level
+ * \param log_message The message to append
  */
 void Logger::log( Logger::Level level, const std::string &log_message ) const
 {
-    const char *message = log_message.c_str();
-
-    logging::trivial::severity_level lvl;
-
-    switch ( level )
+    try
     {
-        case TRACE:
-            lvl = boost::log::trivial::trace;
-            break;
-        case DEBUG:
-            lvl = boost::log::trivial::debug;
-            break;
-        case INFO:
-            lvl = boost::log::trivial::info;
-            break;
-        case WARNING:
-            lvl = boost::log::trivial::warning;
-            break;
-        case ERROR:
-            lvl = boost::log::trivial::error;
-            break;
-        case FATAL:
-            lvl = boost::log::trivial::fatal;
-            break;
-        default:
-            lvl = boost::log::trivial::trace;
-            break;
+        const char *message = log_message.c_str();
+
+        logging::trivial::severity_level lvl;
+
+        switch ( level )
+        {
+            case TRACE:
+                lvl = boost::log::trivial::trace;
+                break;
+            case DEBUG:
+                lvl = boost::log::trivial::debug;
+                break;
+            case INFO:
+                lvl = boost::log::trivial::info;
+                break;
+            case WARNING:
+                lvl = boost::log::trivial::warning;
+                break;
+            case ERROR:
+                lvl = boost::log::trivial::error;
+                break;
+            case FATAL:
+                lvl = boost::log::trivial::fatal;
+                break;
+            default:
+                lvl = boost::log::trivial::trace;
+                break;
+        }
+
+        src::severity_logger< logging::trivial::severity_level > slg;
+
+        BOOST_LOG_SEV( slg, lvl ) << message;
+
+        if( _debug )
+        {
+            std::cout << message << std::endl;
+        }
     }
-
-    src::severity_logger< logging::trivial::severity_level > slg;
-
-    BOOST_LOG_SEV( slg, lvl ) << message;
-
-    if( _debug )
+    catch ( std::exception &e )
     {
-        std::cout << message << std::endl;
+        std::cerr << e.what() << std::endl;
     }
 }
 
 /**
  * Getter for the logger's unique identifier.
- * @return The ID
+ * \return The ID
  */
 std::string Logger::get_id() const
 {
@@ -116,7 +130,7 @@ std::string Logger::get_id() const
 
 /**
  * Getter for the logger's file name
- * @return The name of the logger.
+ * \return The name of the logger.
  */
 std::string Logger::get_file_name() const
 {

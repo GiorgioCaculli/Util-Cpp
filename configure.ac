@@ -1,6 +1,6 @@
 AC_PREREQ([2.69])
 
-AC_INIT([util], [1.1.0], [gzc@caculli.it], [gzc-util], [https://gitlab.com/GiorgioCaculli/Util-Cpp])
+AC_INIT([util], [1.1.1], [gzc@caculli.it], [gzc-util], [https://gitlab.com/GiorgioCaculli/Util-Cpp])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 
 AM_PROG_AR

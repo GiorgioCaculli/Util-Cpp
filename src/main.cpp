@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include <gzc/logger/Logger.hpp>
+#include <gzc/util/logger/Logger.hpp>
 
 #include <sstream>
 
-using namespace util;
+using namespace gzc::util;
 
 int main( int argc, char *argv[] )
 {
