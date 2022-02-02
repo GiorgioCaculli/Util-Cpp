@@ -12,9 +12,10 @@ namespace gzc
         private:
             std::string _file_name;
         public:
-            explicit Serialize( const std::string &file_name );
+            explicit Serialize( std::string file_name );
+
             ~Serialize();
-        }
+        };
     }
 }
 
