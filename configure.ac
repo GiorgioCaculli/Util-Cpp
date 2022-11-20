@@ -4,7 +4,7 @@ AC_INIT([util], [1.1.1], [gzc@caculli.it], [gzc-util], [https://gitlab.com/Giorg
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 
 AM_PROG_AR
-LT_PREREQ([2.4.6])
+LT_PREREQ([2.4.2])
 LT_INIT([dlopen])
 
 AC_LANG([C++])
