@@ -12,7 +12,7 @@
 
 #include <iostream>
 
-using namespace gzc::util;
+using namespace gzc::util::logger;
 
 namespace logging = boost::log;
 namespace src = boost::log::sources;
@@ -27,9 +27,9 @@ namespace keywords = boost::log::keywords;
  * \param file_name The logger's custom filename
  */
 Logger::Logger( std::string id, std::string file_name, bool debug )
-        : _id( std::move( id ) )
-          , _file_name( std::move( file_name ) )
-          , _debug( debug )
+    : _id( std::move( id ) )
+      , _file_name( std::move( file_name ) )
+      , _debug( debug )
 {
     init( _file_name );
 }
@@ -42,25 +42,24 @@ Logger::~Logger()
     std::cout << "Logger ID: " << _id << " File Name: " << _file_name << std::endl;
 }
 
-void Logger::init( const std::string &file_name )
+void Logger::init( const std::string& file_name )
 {
     try
     {
         logging::add_file_log
-                (
-                        keywords::file_name = file_name,
-                        keywords::format =
-                                (
-                                        expr::stream
-                                                << expr::attr< unsigned int >( "LineID" )
-                                                << " ["<< expr::format_date_time< boost::posix_time::ptime >( "TimeStamp", "%Y-%m-%d %H:%M:%S" )
-                                                << "]: <" << logging::trivial::severity
-                                                << "> " << expr::smessage
-                                )
-                );
+        (
+            keywords::file_name = file_name,
+            keywords::format =
+            (
+                expr::stream
+                << expr::attr< unsigned int >( "LineID" )
+                << " [" << expr::format_date_time< boost::posix_time::ptime >( "TimeStamp", "%Y-%m-%d %H:%M:%S" )
+                << "]: <" << logging::trivial::severity
+                << "> " << expr::smessage
+            )
+        );
         logging::add_common_attributes();
-    }
-    catch ( std::exception &e )
+    } catch ( std::exception& e )
     {
         std::cerr << e.what() << std::endl;
     }
@@ -71,11 +70,11 @@ void Logger::init( const std::string &file_name )
  * \param level The severity level
  * \param log_message The message to append
  */
-void Logger::log( Logger::Level level, const std::string &log_message ) const
+void Logger::log( Logger::Level level, const std::string& log_message ) const
 {
     try
     {
-        const char *message = log_message.c_str();
+        const char* message = log_message.c_str();
 
         logging::trivial::severity_level lvl;
 
@@ -108,12 +107,11 @@ void Logger::log( Logger::Level level, const std::string &log_message ) const
 
         BOOST_LOG_SEV( slg, lvl ) << message;
 
-        if( _debug )
+        if ( _debug )
         {
             std::cout << message << std::endl;
         }
-    }
-    catch ( std::exception &e )
+    } catch ( std::exception& e )
     {
         std::cerr << e.what() << std::endl;
     }
