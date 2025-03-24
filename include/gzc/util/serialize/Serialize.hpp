@@ -14,6 +14,8 @@ namespace gzc::util::serialize
     public:
         explicit Serialize( std::string file_name );
 
+        Serialize();
+
         ~Serialize();
     };
 }

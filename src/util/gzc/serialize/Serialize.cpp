@@ -8,5 +8,10 @@ Serialize::Serialize( std::string file_name )
 {
 }
 
+Serialize::Serialize()
+    : Serialize( "default.data" )
+{
+}
+
 Serialize::~Serialize()
 = default;

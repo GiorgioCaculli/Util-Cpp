@@ -28,6 +28,8 @@ namespace gzc::util::logger
 
         Logger( std::string id, std::string file_name, bool debug );
 
+        Logger();
+
         ~Logger();
 
         std::string get_id() const;
