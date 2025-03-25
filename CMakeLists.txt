@@ -51,34 +51,30 @@ find_package(Boost
         REQUIRED CONFIG)
 
 add_library(util_logger SHARED
-        src/util/gzc/logger/Logger.cpp
-        src/util/gzc/logger/LoggerWarning.cpp)
-set_target_properties(util_logger PROPERTIES
-        VERSION ${PROJECT_VERSION}
-        SOVERSION ${PROJECT_VERSION_MAJOR}
-        PUBLIC_HEADER
-        include/gzc/util/logger/Logger.hpp
-        include/gzc/util/logger/LoggerWarning.hpp)
+        src/gzc/util/logger/Logger.cpp
+        src/gzc/util/logger/LoggerWarning.cpp)
+set_target_properties(util_logger PROPERTIES VERSION ${PROJECT_VERSION})
+set_target_properties(util_logger PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
+set_target_properties(util_logger PROPERTIES PUBLIC_HEADER "\
+include/gzc/util/logger/Logger.hpp;\
+include/gzc/util/logger/LoggerWarning.hpp;")
 target_include_directories(util_logger PRIVATE include)
 target_link_libraries(util_logger ${Boost_LIBRARIES})
-install(TARGETS util_logger
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIB}
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(TARGETS util_logger LIBRARY DESTINATION ${CMAKE_INSTALL_LIB})
 
 add_library(util_serialize SHARED
-        src/util/gzc/serialize/Serialize.cpp
-        src/util/gzc/serialize/SerializeJson.cpp)
-set_target_properties(util_serialize PROPERTIES
-        VERSION ${PROJECT_VERSION}
-        SOVERSION ${PROJECT_VERSION_MAJOR}
-        PUBLIC_HEADER
-        include/gzc/util/serialize/Serialize.hpp
-        include/gzc/util/serialize/SerializeJson.hpp)
+        src/gzc/util/serialize/Serialize.cpp
+        src/gzc/util/serialize/SerializeJson.cpp)
+set_target_properties(util_serialize PROPERTIES VERSION ${PROJECT_VERSION})
+set_target_properties(util_serialize PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
+set_target_properties(util_serialize PROPERTIES PUBLIC_HEADER "\
+include/gzc/util/serialize/Serialize.hpp;\
+include/gzc/util/serialize/SerializeJson.hpp;")
 target_include_directories(util_serialize PRIVATE include)
 target_link_libraries(util_serialize ${Boost_LIBRARIES})
-install(TARGETS util_serialize
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIB}
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(TARGETS util_serialize LIBRARY DESTINATION ${CMAKE_INSTALL_LIB})
+
+install(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" FILES_MATCHING PATTERN "*.hpp")
 
 add_executable(util src/main.cpp)
 target_include_directories(util PRIVATE include)
