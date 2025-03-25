@@ -55,9 +55,6 @@ add_library(util_logger SHARED
         src/gzc/util/logger/LoggerWarning.cpp)
 set_target_properties(util_logger PROPERTIES VERSION ${PROJECT_VERSION})
 set_target_properties(util_logger PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
-set_target_properties(util_logger PROPERTIES PUBLIC_HEADER "\
-include/gzc/util/logger/Logger.hpp;\
-include/gzc/util/logger/LoggerWarning.hpp;")
 target_include_directories(util_logger PRIVATE include)
 target_link_libraries(util_logger ${Boost_LIBRARIES})
 install(TARGETS util_logger LIBRARY DESTINATION ${CMAKE_INSTALL_LIB})
@@ -67,9 +64,6 @@ add_library(util_serialize SHARED
         src/gzc/util/serialize/SerializeJson.cpp)
 set_target_properties(util_serialize PROPERTIES VERSION ${PROJECT_VERSION})
 set_target_properties(util_serialize PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
-set_target_properties(util_serialize PROPERTIES PUBLIC_HEADER "\
-include/gzc/util/serialize/Serialize.hpp;\
-include/gzc/util/serialize/SerializeJson.hpp;")
 target_include_directories(util_serialize PRIVATE include)
 target_link_libraries(util_serialize ${Boost_LIBRARIES})
 install(TARGETS util_serialize LIBRARY DESTINATION ${CMAKE_INSTALL_LIB})
