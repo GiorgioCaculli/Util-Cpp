@@ -13,5 +13,24 @@ Serialize::Serialize()
 {
 }
 
+Serialize::Serialize( const Serialize & serialize )
+    : Serialize( serialize.get_file_name() )
+{
+}
+
+Serialize& Serialize::operator=( const Serialize& serialize )
+{
+    if( this != &serialize )
+    {
+        _file_name = serialize._file_name;
+    }
+    return *this;
+}
+
 Serialize::~Serialize()
 = default;
+
+std::string Serialize::get_file_name() const
+{
+    return _file_name;
+}

@@ -34,6 +34,26 @@ Logger::Logger( std::string id, std::string file_name, bool debug )
     init( _file_name );
 }
 
+Logger::Logger()
+    :Logger( "default", "default.log", false )
+{
+}
+
+Logger::Logger( const Logger& logger )
+    : Logger( logger.get_id(), logger.get_file_name(), false )
+{
+}
+
+Logger& Logger::operator=(const Logger& logger )
+{
+    if ( &logger != this )
+    {
+        _id = std::move( logger.get_id() );
+        _file_name = std::move( logger.get_file_name() );
+    }
+    return *this;
+}
+
 /**
  * Upon destruction of the logger, print out its identifier
  */

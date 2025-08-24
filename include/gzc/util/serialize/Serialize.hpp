@@ -16,7 +16,13 @@ namespace gzc::util::serialize
 
         Serialize();
 
+        Serialize( const Serialize & );
+
+        Serialize& operator=( const Serialize& serialize);
+
         ~Serialize();
+
+        [[nodiscard]] std::string get_file_name() const;
     };
 }
 
