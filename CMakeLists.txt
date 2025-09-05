@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.30)
-project(util VERSION 1.1.1 DESCRIPTION "GzC's Utilities")
+project(Util VERSION 1.2.0 DESCRIPTION "GzC's Utilities")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -50,29 +50,23 @@ find_package(Boost
         unit_test_framework
         REQUIRED CONFIG)
 
-add_library(util_logger SHARED
+add_library(gzc_util SHARED
         src/gzc/util/logger/Logger.cpp
-        src/gzc/util/logger/LoggerWarning.cpp)
-set_target_properties(util_logger PROPERTIES VERSION ${PROJECT_VERSION})
-set_target_properties(util_logger PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
-target_include_directories(util_logger PRIVATE include)
-target_link_libraries(util_logger ${Boost_LIBRARIES})
-install(TARGETS util_logger LIBRARY DESTINATION ${CMAKE_INSTALL_LIB})
-
-add_library(util_serialize SHARED
+        src/gzc/util/logger/LoggerWarning.cpp
         src/gzc/util/serialize/Serialize.cpp
-        src/gzc/util/serialize/SerializeJson.cpp)
-set_target_properties(util_serialize PROPERTIES VERSION ${PROJECT_VERSION})
-set_target_properties(util_serialize PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
-target_include_directories(util_serialize PRIVATE include)
-target_link_libraries(util_serialize ${Boost_LIBRARIES})
-install(TARGETS util_serialize LIBRARY DESTINATION ${CMAKE_INSTALL_LIB})
+        src/gzc/util/serialize/SerializeJson.cpp
+        src/gzc/util/resource_bundle/ResourceBundle.cpp)
+set_target_properties(gzc_util PROPERTIES VERSION ${PROJECT_VERSION})
+set_target_properties(gzc_util PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
+target_include_directories(gzc_util PRIVATE include)
+target_link_libraries(gzc_util ${Boost_LIBRARIES})
+install(TARGETS gzc_util LIBRARY DESTINATION ${CMAKE_INSTALL_LIB})
 
 install(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" FILES_MATCHING PATTERN "*.hpp")
 
-add_executable(util src/main.cpp)
-target_include_directories(util PRIVATE include)
-target_link_libraries(util util_logger util_serialize ${Boost_LIBRARIES})
+add_executable(util_exec src/main.cpp)
+target_include_directories(util_exec PRIVATE include)
+target_link_libraries(util_exec gzc_util ${Boost_LIBRARIES})
 
 # uninstall target
 if(NOT TARGET uninstall)
