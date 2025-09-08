@@ -48,6 +48,7 @@ find_package(Boost
         locale
         log
         unit_test_framework
+        thread
         REQUIRED CONFIG)
 
 add_library(gzc_util SHARED

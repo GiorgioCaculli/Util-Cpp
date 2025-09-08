@@ -26,20 +26,13 @@ namespace gzc::util::logger
             FATAL /** Priority level of logging that requires immediate fix */
         };
 
-        Logger( std::string id, std::string file_name, bool debug );
-
+        Logger( const std::string& id, const std::string& file_name, bool debug );
         Logger();
-
         Logger( const Logger& logger );
-
-        Logger &operator=( const Logger& );
-
+        Logger &operator=( const Logger& logger );
         ~Logger();
-
         [[nodiscard]] std::string get_id() const;
-
         [[nodiscard]] std::string get_file_name() const;
-
         void log( Level, const std::string& log_message ) const;
     };
 }

@@ -25,8 +25,9 @@ namespace keywords = boost::log::keywords;
  * Logger's constructor with a specific filename
  * \param id The logger's unique I
  * \param file_name The logger's custom filename
+ * \param debug Check if debug flag is enabled
  */
-Logger::Logger( std::string id, std::string file_name, bool debug )
+Logger::Logger( const std::string& id, const std::string& file_name, const bool debug )
     : _id( std::move( id ) )
       , _file_name( std::move( file_name ) )
       , _debug( debug )
@@ -48,8 +49,8 @@ Logger& Logger::operator=(const Logger& logger )
 {
     if ( &logger != this )
     {
-        _id = std::move( logger.get_id() );
-        _file_name = std::move( logger.get_file_name() );
+        _id = logger.get_id();
+        _file_name = logger.get_file_name();
     }
     return *this;
 }
@@ -70,13 +71,11 @@ void Logger::init( const std::string& file_name )
         (
             keywords::file_name = file_name,
             keywords::format =
-            (
-                expr::stream
-                << expr::attr< unsigned int >( "LineID" )
-                << " [" << expr::format_date_time< boost::posix_time::ptime >( "TimeStamp", "%Y-%m-%d %H:%M:%S" )
-                << "]: <" << logging::trivial::severity
-                << "> " << expr::smessage
-            )
+            expr::stream
+            << expr::attr< unsigned int >( "LineID" )
+            << " [" << expr::format_date_time< boost::posix_time::ptime >( "TimeStamp", "%Y-%m-%d %H:%M:%S" )
+            << "]: <" << logging::trivial::severity
+            << "> " << expr::smessage
         );
         logging::add_common_attributes();
     } catch ( std::exception& e )
@@ -90,7 +89,7 @@ void Logger::init( const std::string& file_name )
  * \param level The severity level
  * \param log_message The message to append
  */
-void Logger::log( Logger::Level level, const std::string& log_message ) const
+void Logger::log( const Level level, const std::string& log_message ) const
 {
     try
     {
