@@ -1,8 +1,7 @@
-#ifndef LIBUTIL_CPP_SERIALIZE_HPP
-#define LIBUTIL_CPP_SERIALIZE_HPP
+#ifndef GZC_UTIL_SERIALIZE_HPP
+#define GZC_UTIL_SERIALIZE_HPP
 
 #include <string>
-
 
 namespace gzc::util::serialize
 {
@@ -12,19 +11,14 @@ namespace gzc::util::serialize
         std::string _file_name;
 
     public:
-        explicit Serialize( std::string file_name );
-
+        explicit Serialize( const std::string& file_name );
         Serialize();
-
         Serialize( const Serialize & );
-
         Serialize& operator=( const Serialize& serialize);
-
-        ~Serialize();
-
+        virtual ~Serialize() = 0;
         [[nodiscard]] std::string get_file_name() const;
     };
 }
 
 
-#endif //LIBUTIL_CPP_SERIALIZE_HPP
+#endif //GZC_UTIL_SERIALIZE_HPP

@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <gzc/util/logger/Logger.hpp>
 
 #include <sstream>

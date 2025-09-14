@@ -1,5 +1,5 @@
-#ifndef SOKOBAN_LOGGER_HPP
-#define SOKOBAN_LOGGER_HPP
+#ifndef GZC_UTIL_LOGGER_HPP
+#define GZC_UTIL_LOGGER_HPP
 
 #include <string>
 
@@ -13,10 +13,10 @@ namespace gzc::util::logger
         std::string _file_name; /** The logger's name */
         bool _debug;
 
-        static void init( const std::string& file_name );
+        static void init( const std::string_view& file_name );
 
     public:
-        enum Level
+        enum class Level
         {
             TRACE, /** The lowest level of importance leaving nothing but the existence of the information */
             DEBUG, /** Debugging information meant for developers */
@@ -38,4 +38,4 @@ namespace gzc::util::logger
 }
 
 
-#endif //SOKOBAN_LOGGER_HPP
+#endif //GZC_UTIL_LOGGER_HPP

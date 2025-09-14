@@ -10,15 +10,13 @@ ResourceBundle::ResourceBundle( std::filesystem::path  file_path, const std::loc
 }
 
 ResourceBundle::ResourceBundle()
-    : ResourceBundle( std::filesystem::current_path(), std::locale( "en_US.UTF8" ) )
+    : ResourceBundle( std::filesystem::current_path(), std::locale( "en_US.UTF-8" ) )
 {
 }
 
-ResourceBundle::~ResourceBundle()
-{
-}
+ResourceBundle::~ResourceBundle() = default;
 
-std::string ResourceBundle::get_string( const std::string& key ) const
+std::string ResourceBundle::get_string( const std::string_view& key ) const
 {
     std::string value;
     for ( const auto & [ k, v ] : _keys_values )

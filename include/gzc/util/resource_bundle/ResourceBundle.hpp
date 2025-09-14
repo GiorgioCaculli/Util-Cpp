@@ -18,7 +18,7 @@ namespace gzc::util::resource_bundle
             ResourceBundle( std::filesystem::path  file_path, const std::locale& locale );
         ResourceBundle();
         ~ResourceBundle();
-        [[nodiscard]] std::string get_string( const std::string& key ) const;
+        [[nodiscard]] std::string get_string( const std::string_view& key ) const;
     };
 }
 

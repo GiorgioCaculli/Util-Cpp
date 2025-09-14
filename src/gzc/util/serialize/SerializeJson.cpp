@@ -1,5 +1,3 @@
 #include <gzc/util/serialize/SerializeJson.hpp>
 
-namespace gzc::util::serialize
-{
-}
+using namespace gzc::util::serialize;

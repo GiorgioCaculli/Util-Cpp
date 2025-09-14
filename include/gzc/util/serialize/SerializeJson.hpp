@@ -5,8 +5,13 @@
 
 namespace gzc::util::serialize
 {
-    class SerializeJSON : Serialize
+    class SerializeJSON : public Serialize
     {
+        explicit SerializeJSON( const std::string& name );
+        SerializeJSON();
+        SerializeJSON( const SerializeJSON& s );
+        SerializeJSON& operator=( const SerializeJSON& s );
+        ~SerializeJSON();
     };
 }
 

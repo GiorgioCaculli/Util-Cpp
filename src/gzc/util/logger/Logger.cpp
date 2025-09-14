@@ -17,8 +17,6 @@ using namespace gzc::util::logger;
 namespace logging = boost::log;
 namespace src = boost::log::sources;
 namespace expr = boost::log::expressions;
-namespace sinks = boost::log::sinks;
-namespace attrs = boost::log::attributes;
 namespace keywords = boost::log::keywords;
 
 /**
@@ -28,8 +26,8 @@ namespace keywords = boost::log::keywords;
  * \param debug Check if debug flag is enabled
  */
 Logger::Logger( const std::string& id, const std::string& file_name, const bool debug )
-    : _id( std::move( id ) )
-      , _file_name( std::move( file_name ) )
+    : _id( id )
+      , _file_name( file_name )
       , _debug( debug )
 {
     init( _file_name );
@@ -63,7 +61,7 @@ Logger::~Logger()
     std::cout << "Logger ID: " << _id << " File Name: " << _file_name << std::endl;
 }
 
-void Logger::init( const std::string& file_name )
+void Logger::init( const std::string_view& file_name )
 {
     try
     {
@@ -99,6 +97,7 @@ void Logger::log( const Level level, const std::string& log_message ) const
 
         switch ( level )
         {
+            using enum gzc::util::logger::Logger::Level;
             case TRACE:
                 lvl = boost::log::trivial::trace;
                 break;

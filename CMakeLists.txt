@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.30)
-project(Util VERSION 1.2.0 DESCRIPTION "GzC's Utilities")
+project(Util VERSION 1.2.1 DESCRIPTION "GzC's Utilities")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
