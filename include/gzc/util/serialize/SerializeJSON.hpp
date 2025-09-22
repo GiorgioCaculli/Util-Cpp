@@ -1,5 +1,5 @@
-#ifndef SERIALIZEJSON_HPP
-#define SERIALIZEJSON_HPP
+#ifndef SERIALIZE_JSON_HPP
+#define SERIALIZE_JSON_HPP
 
 #include <gzc/util/serialize/Serialize.hpp>
 
@@ -7,12 +7,12 @@ namespace gzc::util::serialize
 {
     class SerializeJSON : public Serialize
     {
-        explicit SerializeJSON( const std::string& name );
+        explicit SerializeJSON( const std::string_view& file_name );
         SerializeJSON();
         SerializeJSON( const SerializeJSON& s );
         SerializeJSON& operator=( const SerializeJSON& s );
-        ~SerializeJSON();
+        ~SerializeJSON() override;
     };
 }
 
-#endif //SERIALIZEJSON_HPP
+#endif //SERIALIZE_JSON_HPP
