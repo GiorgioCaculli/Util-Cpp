@@ -3,6 +3,8 @@
 
 #include <gzc/util/serialize/Serialize.hpp>
 
+#include <boost/json.hpp>
+
 namespace gzc::util::serialize
 {
     class SerializeJSON : public Serialize

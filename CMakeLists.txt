@@ -45,10 +45,11 @@ find_package(Boost
         COMPONENTS
         date_time
         filesystem
+        json
         locale
         log
-        unit_test_framework
         thread
+        unit_test_framework
         REQUIRED CONFIG)
 
 add_library(gzc_util SHARED

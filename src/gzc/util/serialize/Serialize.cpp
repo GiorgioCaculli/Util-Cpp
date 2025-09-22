@@ -1,5 +1,10 @@
 #include <gzc/util/serialize/Serialize.hpp>
 
+#include <iomanip>
+#include <iostream>
+#include <fstream>
+#include <filesystem>
+
 using namespace gzc::util::serialize;
 
 Serialize::Serialize( const std::string_view& file_name )
@@ -32,12 +37,25 @@ Serialize::~Serialize()
 template< class T>
 bool Serialize::save( T t ) const
 {
+    if( t == nullptr )
+    {
+        return false;
+    }
+    std::ofstream file;
+    file.open( std::filesystem::path( get_file_name() ), std::ios::out | std::ios::binary );
+    do
+    {
+        file.close();
+    }
+    while( file.is_open() );
     return false;
 }
 
 template< class T>
 T Serialize::load( const std::string_view& file_name ) const
 {
+    std::ifstream file;
+    file.open( std::filesystem::path( file_name ), std::ios::in );
     return nullptr;
 }
 
