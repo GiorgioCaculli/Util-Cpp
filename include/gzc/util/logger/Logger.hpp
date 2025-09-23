@@ -2,20 +2,13 @@
 #define GZC_UTIL_LOGGER_HPP
 
 #include <string>
-
+#include <string_view>
 
 namespace gzc::util::logger
 {
     class Logger
     {
     private:
-        std::string _id; /** The logger's unique ID */
-        std::string _file_name; /** The logger's name */
-        bool _debug;
-
-        static void init( const std::string_view& file_name );
-
-    public:
         enum class Level
         {
             TRACE, /** The lowest level of importance leaving nothing but the existence of the information */
@@ -25,19 +18,23 @@ namespace gzc::util::logger
             ERROR, /** Critical information that requires patch fix */
             FATAL /** Priority level of logging that requires immediate fix */
         };
-
-        Logger( const std::string& id, const std::string& file_name, bool debug );
+        std::string _id; /** The logger's unique ID */
+        std::string _file_name; /** The logger's name */
+        bool _debug;
+        static void init( const std::string_view& file_name );
+        void log( const Level& level, const std::string_view& log_message ) const;
+    public:
+        Logger( const std::string_view& id, const std::string_view& file_name, bool debug );
         Logger();
         Logger( const Logger& logger );
         Logger &operator=( const Logger& logger );
         ~Logger();
-        void log( Level, const std::string& log_message ) const;
-        void trace( const std::string& log_message ) const;
-        void debug( const std::string& log_message ) const;
-        void info( const std::string& log_message ) const;
-        void warning( const std::string& log_message ) const;
-        void error( const std::string& log_message ) const;
-        void fatal( const std::string& log_message ) const;
+        void trace( const std::string_view& log_message ) const;
+        void debug( const std::string_view& log_message ) const;
+        void info( const std::string_view& log_message ) const;
+        void warning( const std::string_view& log_message ) const;
+        void error( const std::string_view& log_message ) const;
+        void fatal( const std::string_view& log_message ) const;
         [[nodiscard]] std::string get_id() const;
         [[nodiscard]] std::string get_file_name() const;
     };

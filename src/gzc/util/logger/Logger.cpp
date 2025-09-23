@@ -25,7 +25,7 @@ namespace keywords = boost::log::keywords;
  * \param file_name The logger's custom filename
  * \param debug Check if debug flag is enabled
  */
-Logger::Logger( const std::string& id, const std::string& file_name, const bool debug )
+Logger::Logger( const std::string_view& id, const std::string_view& file_name, const bool debug )
     : _id( id )
       , _file_name( file_name )
       , _debug( debug )
@@ -87,12 +87,10 @@ void Logger::init( const std::string_view& file_name )
  * \param level The severity level
  * \param log_message The message to append
  */
-void Logger::log( const Level level, const std::string& log_message ) const
+void Logger::log( const Level& level, const std::string_view& log_message ) const
 {
     try
     {
-        const char* message = log_message.c_str();
-
         logging::trivial::severity_level lvl;
 
         switch ( level )
@@ -123,44 +121,44 @@ void Logger::log( const Level level, const std::string& log_message ) const
 
         src::severity_logger< logging::trivial::severity_level > slg;
 
-        BOOST_LOG_SEV( slg, lvl ) << message;
+        BOOST_LOG_SEV( slg, lvl ) << log_message;
 
         if ( _debug )
         {
-            std::cout << message << std::endl;
+            std::cout << lvl << log_message << std::endl;
         }
-    } catch ( std::exception& e )
+    } catch ( const std::exception& e )
     {
         std::cerr << e.what() << std::endl;
     }
 }
 
-void Logger::trace( const std::string& log_message ) const
+void Logger::trace( const std::string_view& log_message ) const
 {
     log( Level::TRACE, log_message );
 }
 
-void Logger::debug( const std::string& log_message ) const
+void Logger::debug( const std::string_view& log_message ) const
 {
     log( Level::DEBUG, log_message );
 }
 
-void Logger::info( const std::string& log_message ) const
+void Logger::info( const std::string_view& log_message ) const
 {
     log( Level::INFO, log_message );
 }
 
-void Logger::warning( const std::string& log_message ) const
+void Logger::warning( const std::string_view& log_message ) const
 {
     log( Level::WARNING, log_message );
 }
 
-void Logger::error( const std::string& log_message ) const
+void Logger::error( const std::string_view& log_message ) const
 {
     log( Level::ERROR, log_message  );
 }
 
-void Logger::fatal( const std::string& log_message ) const
+void Logger::fatal( const std::string_view& log_message ) const
 {
     log( Level::FATAL, log_message );
 }

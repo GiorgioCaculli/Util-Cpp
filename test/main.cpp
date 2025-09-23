@@ -16,15 +16,15 @@ int main( int argc, char* argv[ ] )
     {
         ss << argv[ i ] << " ";
     }
-    logger.log( logger::Logger::Level::INFO, ss.str() );
+    logger.info( ss.str() );
 
     if ( argc <= 1 )
     {
-        logger.log( logger::Logger::Level::ERROR, "Parameter missing" );
+        logger.debug( "Parameter missing" );
         return -1;
     }
 
-    logger.log( logger::Logger::Level::INFO, "Closing Program..." );
+    logger.trace( "Closing Program..." );
 
     return 0;
 }

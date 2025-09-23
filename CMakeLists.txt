@@ -66,7 +66,7 @@ install(TARGETS gzc_util LIBRARY DESTINATION ${CMAKE_INSTALL_LIB})
 
 install(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" FILES_MATCHING PATTERN "*.hpp")
 
-add_executable(util_exec src/main.cpp)
+add_executable(util_exec test/main.cpp)
 target_include_directories(util_exec PRIVATE include)
 target_link_libraries(util_exec gzc_util ${Boost_LIBRARIES})
 
