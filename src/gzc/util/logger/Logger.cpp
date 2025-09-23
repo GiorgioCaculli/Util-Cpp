@@ -125,7 +125,7 @@ void Logger::log( const Level& level, const std::string_view& log_message ) cons
 
         if ( _debug )
         {
-            std::cout << lvl << log_message << std::endl;
+            std::cout << "[ " << lvl << " ]: " << log_message << std::endl;
         }
     } catch ( const std::exception& e )
     {
