@@ -135,6 +135,36 @@ void Logger::log( const Level level, const std::string& log_message ) const
     }
 }
 
+void Logger::trace( const std::string& log_message ) const
+{
+    log( Level::TRACE, log_message );
+}
+
+void Logger::debug( const std::string& log_message ) const
+{
+    log( Level::DEBUG, log_message );
+}
+
+void Logger::info( const std::string& log_message ) const
+{
+    log( Level::INFO, log_message );
+}
+
+void Logger::warning( const std::string& log_message ) const
+{
+    log( Level::WARNING, log_message );
+}
+
+void Logger::error( const std::string& log_message ) const
+{
+    log( Level::ERROR, log_message  );
+}
+
+void Logger::fatal( const std::string& log_message ) const
+{
+    log( Level::FATAL, log_message );
+}
+
 /**
  * Getter for the logger's unique identifier.
  * \return The ID

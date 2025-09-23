@@ -31,9 +31,15 @@ namespace gzc::util::logger
         Logger( const Logger& logger );
         Logger &operator=( const Logger& logger );
         ~Logger();
+        void log( Level, const std::string& log_message ) const;
+        void trace( const std::string& log_message ) const;
+        void debug( const std::string& log_message ) const;
+        void info( const std::string& log_message ) const;
+        void warning( const std::string& log_message ) const;
+        void error( const std::string& log_message ) const;
+        void fatal( const std::string& log_message ) const;
         [[nodiscard]] std::string get_id() const;
         [[nodiscard]] std::string get_file_name() const;
-        void log( Level, const std::string& log_message ) const;
     };
 }
 
