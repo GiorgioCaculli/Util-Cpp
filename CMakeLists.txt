@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.30)
-project(Util VERSION 1.2.3 DESCRIPTION "GzC's Utilities")
+project(Util VERSION 1.2.4 DESCRIPTION "GzC's Utilities")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -57,7 +57,9 @@ add_library(gzc_util SHARED
         src/gzc/util/serialize/Serialize.cpp
         src/gzc/util/serialize/SerializeJSON.cpp
         src/gzc/util/serialize/SerializeXML.cpp
-        src/gzc/util/resource_bundle/ResourceBundle.cpp)
+        src/gzc/util/resource_bundle/ResourceBundle.cpp
+        src/gzc/util/net/Client.cpp
+        src/gzc/util/net/Server.cpp)
 set_target_properties(gzc_util PROPERTIES VERSION ${PROJECT_VERSION})
 set_target_properties(gzc_util PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
 target_include_directories(gzc_util PRIVATE include)

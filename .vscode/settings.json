@@ -2,5 +2,6 @@
     "sonarlint.connectedMode.project": {
         "connectionId": "giorgiocaculli",
         "projectKey": "GiorgioCaculli_Util-Cpp"
-    }
+    },
+    "sonarlint.pathToCompileCommands": "${workspaceFolder}/build/compile_commands.json"
 }
