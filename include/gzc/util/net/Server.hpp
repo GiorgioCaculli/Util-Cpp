@@ -19,12 +19,14 @@ namespace gzc::util::net
     public:
         explicit Server( unsigned short port );
         Server();
-        ~Server();
         Server( const Server& other );
         Server& operator=( const Server& other );
+        virtual ~Server() = 0;
         bool start() const;
-        bool receive( char buffer[ 1024 ] ) const;
-        bool transmit( const char buffer[ 1024 ] ) const;
+        template< typename T >
+        bool receive( T buffer ) const;
+        template< typename T >
+        bool transmit( T buffer ) const;
         bool finish() const;
         int get_socket() const;
         struct sockaddr_in get_address() const;

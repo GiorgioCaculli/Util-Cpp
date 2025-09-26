@@ -15,7 +15,7 @@ namespace gzc::util::net
     {
     private:
         std::string_view _username;
-        int _socket = 0;
+        int _socket = -1;
         struct sockaddr_in _address;
         unsigned short _port;
     public:
@@ -23,10 +23,12 @@ namespace gzc::util::net
         Client();
         Client( const Client& other );
         Client& operator=( const Client& other );
-        ~Client();
+        virtual ~Client() = 0;
         bool start() const;
-        bool receive( char buffer[ 1024 ] ) const;
-        bool transmit( const char buffer[ 1024 ] ) const;
+        template< typename T >
+        bool receive( T buffer ) const;
+        template< typename T >
+        bool transmit( T buffer ) const;
         bool finish() const;
         int get_socket() const;
         struct sockaddr_in get_address() const;

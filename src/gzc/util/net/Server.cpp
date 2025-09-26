@@ -16,9 +16,6 @@ Server::Server()
 {
 }
 
-Server::~Server()
-=default;
-
 Server::Server( const Server& other )
 =default;
 
@@ -36,7 +33,8 @@ bool Server::start() const
     return false;
 }
 
-bool Server::receive( char buffer[ 1024 ] ) const
+template< typename T >
+bool Server::receive( T buffer ) const
 {
     if( _socket != -1 )
     {
@@ -46,7 +44,8 @@ bool Server::receive( char buffer[ 1024 ] ) const
     return false;
 }
 
-bool Server::transmit( const char buffer[ 1024 ] ) const
+template< typename T >
+bool Server::transmit( T buffer ) const
 {
     if( _socket != -1 )
     {

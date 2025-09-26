@@ -30,9 +30,6 @@ Client& Client::operator=( const Client& other )
     return *this;
 }
 
-Client::~Client()
-=default;
-
 bool Client::start() const
 {
     if( _socket != -1 )
@@ -43,7 +40,8 @@ bool Client::start() const
     return false;
 }
 
-bool Client::receive( char buffer[ 1024 ] ) const
+template< typename T >
+bool Client::receive( T buffer ) const
 {
     if( _socket != -1 )
     {
@@ -53,7 +51,8 @@ bool Client::receive( char buffer[ 1024 ] ) const
     return false;
 }
 
-bool Client::transmit( const char buffer[ 1024 ] ) const
+template< typename T >
+bool Client::transmit( T buffer ) const
 {
     if( _socket != -1 )
     {
