@@ -22,6 +22,9 @@ Server::Server( const Server& other )
 Server& Server::operator=( const Server& other )
 =default;
 
+Server::~Server()
+=default;
+
 bool Server::start() const
 {
     if( _socket != -1 )

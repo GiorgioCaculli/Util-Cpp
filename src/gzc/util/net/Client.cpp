@@ -30,6 +30,9 @@ Client& Client::operator=( const Client& other )
     return *this;
 }
 
+Client::~Client()
+= default;
+
 bool Client::start() const
 {
     if( _socket != -1 )
