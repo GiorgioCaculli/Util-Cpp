@@ -52,6 +52,8 @@ find_package(Boost
         unit_test_framework
         REQUIRED CONFIG)
 
+find_library(MARIADB mariadb REQUIRED)
+
 add_library(gzc_util SHARED
         src/gzc/util/logger/Logger.cpp
         src/gzc/util/serialize/Serialize.cpp
@@ -59,18 +61,21 @@ add_library(gzc_util SHARED
         src/gzc/util/serialize/SerializeXML.cpp
         src/gzc/util/resource_bundle/ResourceBundle.cpp
         src/gzc/util/net/Client.cpp
-        src/gzc/util/net/Server.cpp)
+        src/gzc/util/net/Server.cpp
+        src/gzc/util/db/Database.cpp
+        src/gzc/util/db/DatabaseMariaDB.cpp)
 set_target_properties(gzc_util PROPERTIES VERSION ${PROJECT_VERSION})
 set_target_properties(gzc_util PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
 target_include_directories(gzc_util PRIVATE include)
-target_link_libraries(gzc_util ${Boost_LIBRARIES})
+target_link_libraries(gzc_util ${Boost_LIBRARIES} ${MARIADB_LIBRARIES})
 install(TARGETS gzc_util LIBRARY DESTINATION ${CMAKE_INSTALL_LIB})
 
 install(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" FILES_MATCHING PATTERN "*.hpp")
 
 add_executable(util_exec test/main.cpp)
 target_include_directories(util_exec PRIVATE include)
-target_link_libraries(util_exec gzc_util ${Boost_LIBRARIES})
+target_link_libraries(util_exec gzc_util ${Boost_LIBRARIES} ${MARIADB_LIBRARIES})
+install(TARGETS util_exec LIBRARY DESTINATION ${CMAKE_INSTALL_LIB})
 
 # uninstall target
 if(NOT TARGET uninstall)
